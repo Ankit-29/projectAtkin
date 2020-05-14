@@ -1,0 +1,13 @@
+@import "../../../constants.scss";
+
+.app-header-main-container {
+    .main-toolbar{
+        height: $header-height;
+        // background-color: $main-toolbar-color;
+    }
+
+    .secondary-toolbar{
+        height: $header-height*2/3;
+        // background-color: $secondary-toolbar-color;
+    }
+}

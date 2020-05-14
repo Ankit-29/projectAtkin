@@ -1,0 +1,75 @@
+<div class="header-component-main-container">
+    <div class="header py-4">
+        <div class="container">
+          <div class="d-flex">
+            <a class="header-brand" routerLink="/">
+              <!-- <img src="" class="header-brand-img" alt="Project-Atkin"> -->
+              <h3>Project Atkin</h3>
+            </a>
+            <div class="d-flex order-lg-2 ml-auto">
+              <!-- <div class="nav-item d-none d-md-flex">
+                <a href="https://github.com/tabler/tabler" class="btn btn-sm btn-outline-primary" target="_blank">Source code</a>
+              </div> -->
+              
+              <div class="dropdown" *ngIf="userInfo">
+                <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                  <img class="avatar" src="{{userInfo.avatarURL}}"/>
+                  <span class="ml-2 d-none d-lg-block">
+                    <span class="text-default">{{userInfo.name}}</span>
+                    <small class="text-muted d-block mt-1">{{userInfo.role}}</small>
+                  </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                  <a class="dropdown-item" href="#">
+                    <i class="dropdown-icon fe fe-user"></i> Profile
+                  </a>
+                  <a class="dropdown-item" routerLink="/setting">
+                    <i class="dropdown-icon fe fe-settings"></i> Settings
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <span class="float-right"><span class="badge badge-primary">6</span></span>
+                    <i class="dropdown-icon fe fe-mail"></i> Inbox
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="dropdown-icon fe fe-send"></i> Message
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">
+                    <i class="dropdown-icon fe fe-help-circle"></i> Need help?
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="dropdown-icon fe fe-log-out"></i> Sign out
+                  </a>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+              <span class="header-toggler-icon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    
+      <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg order-lg-first">
+                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                  <li class="nav-item" [class.dropdown]="route.childs && route.childs.length" *ngFor="let route of routes">
+                      <ng-container *ngIf="route.childs && route.childs.length else noChildTemp">
+                          <a href="javascript:void(0)" class="nav-link" data-toggle="dropdown"><i class="fe {{route.iconClass}}"></i> {{route.displayText}}</a>
+                          <div class="dropdown-menu dropdown-menu-arrow">
+                            <a routerLink="{{childRoute.url}}" *ngFor="let childRoute of route.childs" class="dropdown-item">{{childRoute.displayText}}</a>
+                          </div>  
+                      </ng-container>
+                      <ng-template #noChildTemp>
+                        <a routerLink="{{route.url}}" href="javascript:void(0)" class="nav-link"><i class="fe {{route.iconClass}}"></i> {{route.displayText}}</a>
+                      </ng-template>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>  
+
+</div>

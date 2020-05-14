@@ -1,0 +1,21 @@
+@import "../constants.scss";
+
+.app-main-container {
+    .app-header {
+        // height: $header-height;
+    }
+
+    .app-body {
+        min-height: calc(100vh - #{$header-height});
+        // background-color: pink;
+        width: 100%;
+        background:#efefef;
+
+    }
+
+    .app-footer {
+        // height: $footer-height;
+        // background-color: aquamarine;
+    }
+}
+
