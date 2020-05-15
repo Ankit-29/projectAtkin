@@ -1,18 +1,88 @@
 <div class="cmp cmp-add-question">
     <div class="main-container">
-        <div class="row">
-            <div class="col-sm-12 card">
+        <form [formGroup]="questionForm" (ngSubmit)="saveQuestion()" class="row">
+            <!-- {{ questionForm.value | json }} -->
+            <div class="col-sm-12 card m-1">
                 <div class="row">
                     <div class="col-sm-12 col-md-4">
                         <h4 class="text-primary p-2">Question Entry Options</h4>
-                        <hr class="m-0">
+                        <hr class="m-0 mb-2">
+                        <div class="form-group d-flex flex-column">
+                            <label for="">Select Category</label>
+                            <nz-select [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                                nzPlaceHolder="Please select" formControlName="categories" nzSize="large">
+                                <nz-option *ngFor="let item of categoryList" [nzLabel]="item" [nzValue]="item">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                        <div class="form-group d-flex flex-column">
+                            <label for="">Select Difficulty</label>
+                            <nz-select nzAllowClear nzPlaceHolder="Choose" nzSize="large" formControlName="level">
+                                <nz-option *ngFor="let lvl of difficulty" nzValue="{{ lvl.id }}"
+                                    nzLabel="{{ lvl.label }}">
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                        <div class="form-group d-flex flex-column">
+                            <label for="">Question Id</label>
+                            <input nz-input placeholder="Question Id" disabled [disabled]="true" nzSize="large" />
+                        </div>
                     </div>
                     <div class="col-sm-12 col-md-8">
                         <h4 class="text-primary p-2">Question</h4>
-                        <hr class="m-0">
+                        <hr class="m-0 mb-2">
+                        <div class="form-group">
+                            <label for="">Question</label>
+                            <ckeditor formControlName="question" [editor]="Editor" [config]="ckConfig"></ckeditor>
+                        </div>
+
+                        <!-- Test Case -->
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="">Test Case</label>
+                            </div>
+                            <div class="col-6">
+                                <label for="">Answer</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <ng-container formArrayName="testCases"
+                                    *ngFor="let tc of testCases.controls;let i=index">
+                                    <div class="row" [formGroupName]="i">
+                                        <div class="col-5 form-group">
+                                            <textarea row="1" formControlName="testCase" nz-input placeholder="">
+                                            </textarea>
+                                        </div>
+                                        <div class="col-5 form-group">
+                                            <textarea row="1" formControlName="answer" nz-input placeholder="">
+                                            </textarea>
+                                        </div>
+                                        <div class="col-2 form-group">
+                                            <button (click)="deleteTestCase(i)" *ngIf="i>=1" nz-button nzShape="circle">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-end">
+                                    <button class="m-1" type="button" (click)="addTestCase()" nz-button nzType="primary">Add TestCase</button>
+                                    <button class="m-1" type="submit" [disabled]="!questionForm.valid" nz-button nzType="primary">Save Question</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
+
+
+
+<ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>
