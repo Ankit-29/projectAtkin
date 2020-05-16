@@ -22,4 +22,21 @@ export class QuestionService {
   addQuestion(questionData: IQuestion) {
     return this.apiService.post('question/', questionData);
   }
+
+  updateQuestion(questionData: IQuestion, id: number) {
+    return this.apiService.put(`question/${id}`, questionData);
+  }
+
+  getAllQuestion() {
+    return this.apiService.get('question/');
+  }
+
+  getQuestionsByFilter(filters) {
+    return this.apiService.get('question/filter', filters);
+  }
+
+
+
 }
+
+

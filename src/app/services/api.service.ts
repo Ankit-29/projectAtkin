@@ -20,7 +20,7 @@ export class ApiService {
     return throwError(error.error);
   }
 
-  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+  get(path: string, params: HttpParams | { [param: string]: string | string[] } = new HttpParams()): Observable<any> {
     return this.http.get(`${this.apiUrl}${path}`, { params });
   }
 
@@ -33,6 +33,14 @@ export class ApiService {
 
   post(path: string, body: object = {}): Observable<any> {
     return this.http.post(
+      `${this.apiUrl}${path}`,
+      body
+    );
+  }
+
+
+  patch(path: string, body: object = {}): Observable<any> {
+    return this.http.patch(
       `${this.apiUrl}${path}`,
       body
     );

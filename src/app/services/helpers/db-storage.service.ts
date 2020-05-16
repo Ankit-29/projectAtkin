@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StorageType } from '../models/enums';
+import { StorageType } from '../../models/enums';
 import { Subscription, Observable } from 'rxjs';
 
 @Injectable({

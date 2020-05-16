@@ -104,4 +104,9 @@ export class UtilityService {
     }
   }
 
+
+  changeNavigation(path) {
+    this.router.navigateByUrl(path);
+  }
+
 }

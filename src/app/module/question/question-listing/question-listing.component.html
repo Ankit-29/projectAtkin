@@ -1,0 +1,65 @@
+<div class="cmp cmp-question-listing m-0">
+    <div class="main-container">
+        <div class="row">
+            <div class="col-12 card mt-2">
+                <form [formGroup]="filterGroup" class="row mt-2" (ngSubmit)="filter()">
+                    <div class="col-sm-12 col-md-2 form-group d-flex flex-column">
+                        <label for="">Category</label>
+                        <nz-select formControlName="categories" [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
+                            nzPlaceHolder="Please select">
+                            <nz-option *ngFor="let item of categoryList" [nzLabel]="item" [nzValue]="item">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-sm-12 col-md-2 form-group d-flex flex-column">
+                        <label for="">Difficulty</label>
+                        <nz-select formControlName="level" nzAllowClear nzPlaceHolder="Choose" >
+                            <nz-option nzValue="" nzLabel="Any">
+                            </nz-option>
+                            <nz-option *ngFor="let lvl of difficulty" nzValue="{{ lvl.id }}" nzLabel="{{ lvl.label }}">
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-sm-12 col-md-2 form-group d-flex flex-column">
+                        <label for="">Question Id</label>
+                        <input formControlName="qId" nz-input placeholder="Question Id" type="number" />
+                    </div>
+                    <div class="mt-2 col-sm-12 col-md-2 d-flex flex-column justify-content-center">
+                        <button type="submit" nz-button nzType="primary">Filter</button>
+                    </div>
+                </form>
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <nz-table #basicTable [nzData]="questions">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Title</th>
+                                    <th>Categories</th>
+                                    <th>Difficulty</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of basicTable.data">
+                                <td>{{ data.qId }}</td>
+                                <td>{{ data.title }}</td>
+                                <td>{{ data.categories.join(', ') }}</td>
+                                <td>{{ difficulty[data.level-1].label }}</td>
+                                <td>
+                                    <button nz-button nzShape="circle" (click)="editQuestion(data.qId)">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                              </tr>
+                            </tbody>
+                        </nz-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #tagPlaceHolder let-selectedList> and {{ selectedList.length }} more selected </ng-template>

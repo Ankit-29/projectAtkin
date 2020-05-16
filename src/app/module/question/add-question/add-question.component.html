@@ -1,10 +1,10 @@
-<div class="cmp cmp-add-question">
+<div class="cmp cmp-add-question m-0">
     <div class="main-container">
-        <form [formGroup]="questionForm" (ngSubmit)="saveQuestion()" class="row">
+        <form [formGroup]="questionForm" (ngSubmit)="saveQuestion()" class="row m-0">
             <!-- {{ questionForm.value | json }} -->
-            <div class="col-sm-12 card m-1">
+            <div class="col-sm-12 card mt-2">
                 <div class="row">
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-sm-12 col-md-3">
                         <h4 class="text-primary p-2">Question Entry Options</h4>
                         <hr class="m-0 mb-2">
                         <div class="form-group d-flex flex-column">
@@ -25,15 +25,22 @@
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label for="">Question Id</label>
-                            <input nz-input placeholder="Question Id" disabled [disabled]="true" nzSize="large" />
+                            <input formControlName="qId" nz-input placeholder="Question Id" disabled [disabled]="true"
+                                nzSize="large" />
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-8">
+                    <div class="col-sm-12 col-md-9">
                         <h4 class="text-primary p-2">Question</h4>
                         <hr class="m-0 mb-2">
-                        <div class="form-group">
-                            <label for="">Question</label>
-                            <ckeditor formControlName="question" [editor]="Editor" [config]="ckConfig"></ckeditor>
+                        <div class="row">
+                            <div class="col-sm-12 form-group">
+                                <label for="">Title</label>
+                                <input formControlName="title" nz-input placeholder="Question Title" nzSize="large" />
+                            </div>
+                            <div class="col-sm-12 form-group">
+                                <label for="">Question</label>
+                                <ckeditor formControlName="question" [editor]="Editor" [config]="ckConfig"></ckeditor>
+                            </div>
                         </div>
 
                         <!-- Test Case -->
@@ -71,8 +78,10 @@
                         <div class="row mb-2">
                             <div class="col-12">
                                 <div class="d-flex justify-content-end">
-                                    <button class="m-1" type="button" (click)="addTestCase()" nz-button nzType="primary">Add TestCase</button>
-                                    <button class="m-1" type="submit" [disabled]="!questionForm.valid" nz-button nzType="primary">Save Question</button>
+                                    <button class="m-1" type="button" (click)="addTestCase()" nz-button
+                                        nzType="primary">Add TestCase</button>
+                                    <button class="m-1" type="submit" [disabled]="!questionForm.valid" nz-button
+                                        nzType="primary">Save Question</button>
                                 </div>
                             </div>
                         </div>

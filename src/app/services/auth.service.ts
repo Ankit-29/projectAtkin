@@ -1,7 +1,7 @@
 import { ApiService } from './api.service';
 import { Observable, Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { DbStorageService } from './db-storage.service';
+import { DbStorageService } from './helpers/db-storage.service';
 import { CONSTANT } from '../constants/constants';
 
 @Injectable({
