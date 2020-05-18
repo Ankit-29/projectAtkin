@@ -3,13 +3,15 @@ import { Observable, Subscription } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { DbStorageService } from './helpers/db-storage.service';
 import { CONSTANT } from '../constants/constants';
+import { IUser } from '../models/user.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: "root"
+    providedIn: 'root'
 })
 export class AuthService {
 
-    private user = null;
+    private user: IUser = null;
     private authToken = null;
 
     getAppConfigState$: Observable<any> = null;
@@ -20,21 +22,30 @@ export class AuthService {
         private apiService: ApiService,
         private dbStorageService: DbStorageService
     ) {
-        this.authToken = this.dbStorageService.getItem('token') || CONSTANT.TOKEN;
+        this.authToken = this.dbStorageService.getItem('token') || null;
+        this.user = JSON.parse(this.dbStorageService.getItem('user')) || null;
     }
 
     refeshToken() {
     }
 
     isLoggedIn(): boolean {
-        return this.user != null && !this.user.expired;
+        return this.user != null && this.authToken != null;
     }
 
     getAuthorizationHeaderValue(): string {
         return this.authToken || '';
     }
 
-    login() {
+    login(credential) {
+        return this.apiService.post(`user/login/`, credential).pipe(
+            map((data: { message: string; data: IUser; token: string; }) => {
+                this.user = data.data;
+                this.dbStorageService.setItem('token', data.token);
+                this.dbStorageService.setItem('user', JSON.stringify(data.data));
+                return data;
+            })
+        );
     }
 
     logout() {
@@ -44,5 +55,9 @@ export class AuthService {
     }
 
     changePassword() {
+    }
+
+    getUser() {
+        return this.user;
     }
 }

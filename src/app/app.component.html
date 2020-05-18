@@ -1,6 +1,6 @@
-<div class="app-main-container">
+<div *ngIf="isLoggedin" class="app-main-container">
   <div class="app-header">
-    <app-header ></app-header>
+    <app-header></app-header>
   </div>
   <div class="app-body panel-container">
     <router-outlet></router-outlet>
@@ -8,4 +8,8 @@
   <div class="app-footer">
     <app-footer></app-footer>
   </div>
+</div>
+
+<div *ngIf="!isLoggedin">
+  <router-outlet></router-outlet>
 </div>
