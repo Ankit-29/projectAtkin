@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +8,11 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  isLoggedin = false;
+  isLoggedin$: BehaviorSubject<boolean>;
   title = 'projectAtkin';
 
   constructor(private authService: AuthService) {
-    this.isLoggedin = this.authService.isLoggedIn();
+    this.isLoggedin$ = this.authService.isLoggedIn$;
   }
 }
 

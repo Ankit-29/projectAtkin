@@ -1,10 +1,11 @@
 import { ApiService } from './api.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { DbStorageService } from './helpers/db-storage.service';
 import { CONSTANT } from '../constants/constants';
 import { IUser } from '../models/user.model';
 import { map } from 'rxjs/operators';
+import { UtilityService } from './helpers/utility.service';
 
 @Injectable({
     providedIn: 'root'
@@ -14,22 +15,25 @@ export class AuthService {
     private user: IUser = null;
     private authToken = null;
 
+    isLoggedIn$ = new BehaviorSubject<boolean>(false);
+
     getAppConfigState$: Observable<any> = null;
     subscriptions: Subscription[] = [];
 
-
     constructor(
         private apiService: ApiService,
-        private dbStorageService: DbStorageService
+        private dbStorageService: DbStorageService,
+        private utitlityService: UtilityService,
     ) {
-        this.authToken = this.dbStorageService.getItem('token') || null;
-        this.user = JSON.parse(this.dbStorageService.getItem('user')) || null;
+        this.isLoggedIn$.next(this.checkLogin());
     }
 
     refeshToken() {
     }
 
-    isLoggedIn(): boolean {
+    checkLogin(): boolean {
+        this.authToken = this.dbStorageService.getItem('token') || null;
+        this.user = JSON.parse(this.dbStorageService.getItem('user')) || null;
         return this.user != null && this.authToken != null;
     }
 
@@ -43,6 +47,7 @@ export class AuthService {
                 this.user = data.data;
                 this.dbStorageService.setItem('token', data.token);
                 this.dbStorageService.setItem('user', JSON.stringify(data.data));
+                this.isLoggedIn$.next(this.checkLogin());
                 return data;
             })
         );

@@ -8,7 +8,7 @@ import { LoginScreenGuard } from './guards/login-screen.guard';
 
 const routes: Routes = [
   { path: '', loadChildren: () => LoginModule, canActivate: [LoginScreenGuard] },
-  { path: 'admin/question', loadChildren: () => QuestionModule, canActivate: [AuthGuard] },
+  { path: 'question', loadChildren: () => QuestionModule, canActivate: [AuthGuard] },
   { path: '**', component: E404Component }
 ];
 

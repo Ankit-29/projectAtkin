@@ -1,4 +1,4 @@
-<div *ngIf="isLoggedin" class="app-main-container">
+<div *ngIf="isLoggedin$ | async" class="app-main-container">
   <div class="app-header">
     <app-header></app-header>
   </div>
@@ -10,6 +10,6 @@
   </div>
 </div>
 
-<div *ngIf="!isLoggedin">
+<div *ngIf="!(isLoggedin$ | async)">
   <router-outlet></router-outlet>
 </div>
