@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe((data: { message: string; data: IUser; token: string; }) => {
       this.utilityService.showMessage(data.message, MessageTypes.Success);
       if (data.data.type === 1) {
-       this.utilityService.changeNavigation('/question');
+        this.utilityService.changeNavigation('/admin');
+      } else {
+        this.utilityService.changeNavigation('/');
       }
     }, error => {
       this.utilityService.showMessage(error.error.message, MessageTypes.Error);

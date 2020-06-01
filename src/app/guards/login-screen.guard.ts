@@ -15,7 +15,7 @@ export class LoginScreenGuard implements CanActivate {
     if (this.authService.isLoggedIn$.value) {
       console.log(this.authService.getUser());
       if (this.authService.getUser().type === 1) {
-        this.router.navigate(['/question']);
+        this.router.navigate(['/admin/question']);
       } else {
         this.router.navigate(['/question']);
       }
