@@ -1,0 +1,16 @@
+<div class="row" *ngIf="isCodeEditor">
+    <div class="col-4">
+        <div class="form-group d-flex">
+            <nz-select style="width:100%" nzPlaceHolder="Please select">
+                <nz-option *ngFor="let language of languages" [nzLabel]="language.name" [nzValue]="language.id">
+                </nz-option>
+            </nz-select>
+        </div>
+    </div>
+    <div class="col-4">
+        <button nz-button nzType="primary">Run</button>
+    </div>
+</div>
+<ngx-monaco-editor style="height:90%" [options]="editorOptions" [(ngModel)]="content"
+    (ngModelChange)="onValueChange($event)">
+</ngx-monaco-editor>

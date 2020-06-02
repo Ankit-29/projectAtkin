@@ -10,12 +10,21 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { CodeEditorComponent } from './code-editor/code-editor.component';
+import { PlaygroundComponent } from './playground/playground.component'
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 
 @NgModule({
-  declarations: [E404Component],
+  declarations: [E404Component, CodeEditorComponent, PlaygroundComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    NzSwitchModule,
+    FormsModule,
+    MonacoEditorModule.forRoot(),
+    NzSelectModule,
+    NzButtonModule,
   ],
   exports: [
     E404Component,
@@ -26,6 +35,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzButtonModule,
     NzIconModule,
     NzTableModule,
+    NzSwitchModule
   ]
 })
 export class SharedModule { }

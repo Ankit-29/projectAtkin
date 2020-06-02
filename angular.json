@@ -25,7 +25,8 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { "glob": "**/*", "input": "node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" }
             ],
             "styles": [
               "src/styles.scss",
@@ -120,6 +121,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "projectAtkin"
 }
