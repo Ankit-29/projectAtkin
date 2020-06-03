@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { UtilityService } from 'src/app/services/helpers/utility.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,8 @@ export class HeaderComponent implements OnInit {
   @Input() userInfo = null;
   @Input() routes = null;
 
-  constructor() {
+  constructor(private authService: AuthService,private utilityService: UtilityService) {
+
     this.userInfo = {
       name: 'Jane Person',
       role: 'Admin',
@@ -64,4 +67,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  signOut() {
+    this.authService.logout();
+    this.utilityService.changeNavigation('/login');
+  }
 }

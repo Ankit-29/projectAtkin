@@ -54,6 +54,9 @@ export class AuthService {
     }
 
     logout() {
+        this.dbStorageService.setItem('user', null);
+        this.dbStorageService.setItem('token', null);
+        this.isLoggedIn$.next(this.checkLogin());
     }
 
     register() {

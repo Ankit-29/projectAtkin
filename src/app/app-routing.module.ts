@@ -7,11 +7,12 @@ import { LoginScreenGuard } from './guards/login-screen.guard';
 import { AdminModule } from './module/admin/admin.module';
 import { UserModule } from './module/user/user.module';
 import { PlaygroundComponent } from './module/shared/playground/playground.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: 'playground', component: PlaygroundComponent },
   { path: 'login', loadChildren: () => LoginModule, canActivate: [LoginScreenGuard] },
-  { path: 'admin', loadChildren: () => AdminModule, canActivate: [AuthGuard] },
+  { path: 'admin', loadChildren: () => AdminModule, canActivate: [AuthGuard, AdminGuard] },
   { path: '', loadChildren: () => UserModule, canActivate: [AuthGuard] },
   { path: '**', component: E404Component }
 ];
