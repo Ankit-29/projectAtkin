@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 border-right">
                         <div class="mt-2" style="height:90vh">
-                            <app-code-editor [content]="code" (contentChange)="onCodeChange($event)"></app-code-editor>
+                            <app-code-editor [editor]="code" (contentChange)="onCodeChange($event)"></app-code-editor>
                         </div>
                         <hr class="m-0">
                         <div class="mt-1">
@@ -13,8 +13,8 @@
                             <nz-switch [(ngModel)]="isStdin"></nz-switch>
                         </div>
                         <div *ngIf="isStdin" style="height:200px;">
-                            <app-code-editor [isCodeEditor]="false" [content]="'hello'"
-                                (contentChange)="onCodeChange($event)"></app-code-editor>
+                            <app-code-editor [editor]="input"
+                                (contentChange)="onInputChange($event)"></app-code-editor>
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-6 mt-2">

@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CONSTANT } from 'src/app/constants/constants';
+import { IEditor } from 'src/app/models/editor.model';
 
 
 @Component({
@@ -8,11 +9,14 @@ import { CONSTANT } from 'src/app/constants/constants';
   styleUrls: ['./code-editor.component.scss']
 })
 export class CodeEditorComponent implements OnInit {
-  @Input() content: string;
-  @Input() isCodeEditor = true;
+  @Input() editor: IEditor = {
+    content: '',
+    options: { isCodeEditor: true, languageId: 71 }
+  };
   @Output() contentChange = new EventEmitter<string>();
 
   languages = CONSTANT.AllowedLanguages;
+
 
   editorOptions = { theme: 'vs', language: 'javascript' };
 

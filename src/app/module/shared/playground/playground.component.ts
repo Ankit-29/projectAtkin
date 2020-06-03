@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IEditor } from 'src/app/models/editor.model';
 
 @Component({
   selector: 'app-playground',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaygroundComponent implements OnInit {
 
-  code = 'function x() {\nconsole.log("Hello world!");\n}';
+  code: IEditor = {
+    content: `print('Hello world')`,
+    options: {
+      isCodeEditor: true,
+      languageId: 71,
+    }
+  };
+
+  input: IEditor = {
+    content: 'Input',
+    options: {
+      isCodeEditor: false,
+    }
+  };
   isStdin = false;
   output = 'No Output Yet';
+
 
   constructor() { }
 
@@ -18,7 +33,11 @@ export class PlaygroundComponent implements OnInit {
   }
 
   onCodeChange(code) {
-    console.log(code);
+    this.code = code;
+  }
+
+  onInputChange(input) {
+    this.input = input;
   }
 
 }
