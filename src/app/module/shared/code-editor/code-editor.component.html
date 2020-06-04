@@ -1,4 +1,4 @@
-<div class="row" *ngIf="editor.options.isCodeEditor">
+<div class="row" *ngIf="editor && editor.options.isCodeEditor">
     <div class="col-4">
         <div class="form-group d-flex">
             <nz-select [(ngModel)]="editor.options.languageId" style="width:100%" nzPlaceHolder="Please select">
@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="col-4">
-        <button nz-button nzType="primary">Run</button>
+        <button nz-button nzType="primary" (click)="runCode()">Run</button>
     </div>
 </div>
 <ngx-monaco-editor style="height:90%" [options]="editorOptions" [(ngModel)]="editor.content"

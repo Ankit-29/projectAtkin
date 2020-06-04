@@ -14,6 +14,8 @@ export class CodeEditorComponent implements OnInit {
     options: { isCodeEditor: true, languageId: 71 }
   };
   @Output() contentChange = new EventEmitter<string>();
+  @Output() runCodeEmitter = new EventEmitter<string>();
+
 
   languages = CONSTANT.AllowedLanguages;
 
@@ -21,10 +23,15 @@ export class CodeEditorComponent implements OnInit {
   editorOptions = { theme: 'vs', language: 'javascript' };
 
   ngOnInit() {
+    console.log(this.editor);
   }
 
   onValueChange($event) {
     this.contentChange.emit($event);
+  }
+
+  runCode() {
+    this.runCodeEmitter.emit();
   }
 
 }

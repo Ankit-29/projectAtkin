@@ -5,7 +5,24 @@
                 <div class="row">
                     <div class="col-sm-12 col-lg-6 border-right">
                         <div class="mt-2" style="height:90vh">
-                            <app-code-editor [editor]="code" (contentChange)="onCodeChange($event)"></app-code-editor>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group d-flex">
+                                        <nz-select [(ngModel)]="languageId" style="width:100%"
+                                            nzPlaceHolder="Please select">
+                                            <nz-option *ngFor="let language of languages" [nzLabel]="language.name"
+                                                [nzValue]="language.id">
+                                            </nz-option>
+                                        </nz-select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <button nz-button nzType="primary" (click)="onRunCode()">Run</button>
+                                </div>
+                            </div>
+                            <ngx-monaco-editor style="height:90%" [options]="editorOptions"
+                                [(ngModel)]="code">
+                            </ngx-monaco-editor>
                         </div>
                         <hr class="m-0">
                         <div class="mt-1">
@@ -13,8 +30,8 @@
                             <nz-switch [(ngModel)]="isStdin"></nz-switch>
                         </div>
                         <div *ngIf="isStdin" style="height:200px;">
-                            <app-code-editor [editor]="input"
-                                (contentChange)="onInputChange($event)"></app-code-editor>
+                            <ngx-monaco-editor style="height:90%" [options]="editorOptions" [(ngModel)]="input">
+                            </ngx-monaco-editor>
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-6 mt-2">

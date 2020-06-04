@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { IEditor } from 'src/app/models/editor.model';
+import { ICodeSubmission } from 'src/app/models/code-submission.model';
+import { CompilerService } from 'src/app/services/compiler/compiler.service';
+import { UtilityService } from 'src/app/services/helpers/utility.service';
+import { MessageTypes } from 'src/app/models/enums';
+import { CONSTANT } from 'src/app/constants/constants';
 
 @Component({
   selector: 'app-playground',
@@ -8,36 +13,37 @@ import { IEditor } from 'src/app/models/editor.model';
 })
 export class PlaygroundComponent implements OnInit {
 
-  code: IEditor = {
-    content: `print('Hello world')`,
-    options: {
-      isCodeEditor: true,
-      languageId: 71,
-    }
-  };
-
-  input: IEditor = {
-    content: 'Input',
-    options: {
-      isCodeEditor: false,
-    }
-  };
+  code = 'print("hello")';
+  input = '\n\n';
+  languageId = 71;
+  languages = CONSTANT.AllowedLanguages;
+  editorOptions = { theme: 'vs', language: 'c' };
   isStdin = false;
   output = 'No Output Yet';
 
 
-  constructor() { }
+  constructor(
+    private compilerService: CompilerService,
+    private utilityService: UtilityService
+  ) { }
 
 
   ngOnInit() {
   }
 
-  onCodeChange(code) {
-    this.code = code;
+
+  onRunCode() {
+    const submission: ICodeSubmission = {
+      sourceCode: this.code,
+      stdin: this.input,
+      languageId: this.languageId
+    };
+    this.compilerService.compile(submission).subscribe((response: { stdout: string, stderr: string }) => {
+      this.output = response.stdout !== null ? response.stdout : response.stderr;
+    }, error => {
+      this.utilityService.showMessage(error.error.message, MessageTypes.Error);
+    });
   }
 
-  onInputChange(input) {
-    this.input = input;
-  }
 
 }
