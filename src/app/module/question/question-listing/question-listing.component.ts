@@ -6,6 +6,7 @@ import { CONSTANT } from 'src/app/constants/constants';
 import { ICategory } from 'src/app/models/category.model';
 import { IQuestion } from 'src/app/models/question.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-question-listing',
@@ -13,6 +14,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./question-listing.component.scss']
 })
 export class QuestionListingComponent implements OnInit {
+
+  isAdmin = false;
 
   categoryList: string[] = [];
   difficulty = CONSTANT.LEVEL;
@@ -24,10 +27,15 @@ export class QuestionListingComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private questionService: QuestionService,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
+    private activatedRoutes: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
+    console.log(this.router.url.split('/')[1]);
+    this.isAdmin = this.router.url.split('/')[1] === 'admin';
+    console.log(this.isAdmin);
     this.initCategories();
     this.initQuestion();
     this.initFilterGroup();
@@ -71,6 +79,10 @@ export class QuestionListingComponent implements OnInit {
 
   editQuestion(qId) {
     this.utilityService.changeNavigation(`question/edit/${qId}`);
+  }
+
+  solveQuestion(qId) {
+    this.utilityService.changeNavigation(`question/solve/${qId}`);
   }
 
 }

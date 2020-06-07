@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { QuestionListingComponent } from './question-listing/question-listing.component';
+import { SolveQuestionComponent } from './solve-question/solve-question.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'edit/:id',
     component: AddQuestionComponent
+  },
+  {
+    path: 'solve/:id',
+    component: SolveQuestionComponent
   },
 ];
 

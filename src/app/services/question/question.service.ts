@@ -35,6 +35,9 @@ export class QuestionService {
     return this.apiService.get('question/filter', filters);
   }
 
+  getQuestion(qId) {
+    return this.apiService.get(`question/${qId}`);
+  }
 
 
 }

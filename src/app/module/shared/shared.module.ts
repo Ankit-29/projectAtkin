@@ -35,7 +35,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     NzButtonModule,
     NzIconModule,
     NzTableModule,
-    NzSwitchModule
+    NzSwitchModule,
   ]
 })
 export class SharedModule { }

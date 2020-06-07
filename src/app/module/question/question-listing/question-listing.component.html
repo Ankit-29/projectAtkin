@@ -38,7 +38,8 @@
                                     <th>Title</th>
                                     <th>Categories</th>
                                     <th>Difficulty</th>
-                                    <th>Edit</th>
+                                    <th *ngIf='isAdmin'>Edit</th>
+                                    <th *ngIf='!isAdmin'>Solve</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,9 +48,14 @@
                                 <td>{{ data.title }}</td>
                                 <td>{{ data.categories.join(', ') }}</td>
                                 <td>{{ difficulty[data.level-1].label }}</td>
-                                <td>
+                                <td *ngIf='isAdmin'>
                                     <button nz-button nzShape="circle" (click)="editQuestion(data.qId)">
                                         <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                                <td *ngIf='!isAdmin'>
+                                    <button nzType="primary" nz-button  (click)="solveQuestion(data.qId)">
+                                        Solve
                                     </button>
                                 </td>
                               </tr>
