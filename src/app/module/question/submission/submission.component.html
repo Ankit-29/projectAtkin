@@ -1,0 +1,24 @@
+<div class="cmp cmp-submission">
+    <div class="main-container">
+        <div class="row">
+            <div class="col-lg-12 card mt-2">
+                <nz-table #basicTable [nzData]="token">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Status</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of basicTable.data; let i=index">
+                            <td>{{ i+1 }}</td>
+                            <td>{{ correct[data.token] || incorrect[data.token] ? 'Completed' : 'Compiling' }}</td>
+                            <td>{{ correct[data.token] ? 'Correct' : incorrect[data.token] ? 'Incorrect' : 'Pending' }}</td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+        </div>
+    </div>
+</div>

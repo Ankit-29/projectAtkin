@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { QuestionListingComponent } from './question-listing/question-listing.component';
 import { SolveQuestionComponent } from './solve-question/solve-question.component';
+import { SubmissionComponent } from './submission/submission.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'solve/:id',
     component: SolveQuestionComponent
+  },
+  {
+    path: 'submission/:token',
+    component: SubmissionComponent
   },
 ];
 

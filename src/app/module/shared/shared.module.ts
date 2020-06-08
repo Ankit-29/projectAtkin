@@ -14,6 +14,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
 import { PlaygroundComponent } from './playground/playground.component'
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     NzIconModule,
     NzTableModule,
     NzSwitchModule,
+    NzTabsModule
   ]
 })
 export class SharedModule { }

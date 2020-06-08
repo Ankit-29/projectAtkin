@@ -21,4 +21,16 @@ export class CompilerService {
             tap(() => this.utilityService.hidePreLoader())
         );
     }
+
+    submit(payload: ICodeSubmission) {
+        this.utilityService.showPreLoader();
+        return this.apiService.post(`${this.compilerApi}/submit`, payload).pipe(
+            tap(() => this.utilityService.hidePreLoader())
+        );
+    }
+
+    getResult(payload) {
+        // this.utilityService.showPreLoader();
+        return this.apiService.post(`${this.compilerApi}/result`, payload);
+    }
 }

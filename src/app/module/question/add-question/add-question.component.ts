@@ -114,6 +114,10 @@ export class AddQuestionComponent implements OnInit {
       if (data.count === 0) {
         this.utilityService.changeNavigation(`question/add`);
       } else {
+        this.deleteTestCase(0);
+        data.questions[0].testCases.forEach(testCase => {
+          this.addTestCase();
+        });
         this.questionForm.patchValue(data.questions[0]);
       }
     }, error => {

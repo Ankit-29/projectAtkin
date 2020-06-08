@@ -105,8 +105,8 @@ export class UtilityService {
   }
 
 
-  changeNavigation(path) {
-    this.router.navigateByUrl(path);
+  changeNavigation(path, state = {}) {
+    this.router.navigateByUrl(path, state);
   }
 
 }

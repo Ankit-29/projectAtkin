@@ -36,7 +36,10 @@ export class QuestionService {
   }
 
   getQuestion(qId) {
-    return this.apiService.get(`question/${qId}`);
+    this.utilityService.showPreLoader();
+    return this.apiService.get(`question/${qId}`).pipe(
+      tap(() => this.utilityService.hidePreLoader())
+    );
   }
 
 

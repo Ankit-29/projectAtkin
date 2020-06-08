@@ -8,10 +8,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuestionListingComponent } from './question-listing/question-listing.component';
 import { SolveQuestionComponent } from './solve-question/solve-question.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { SubmissionComponent } from './submission/submission.component';
 
 
 @NgModule({
-  declarations: [AddQuestionComponent, QuestionListingComponent, SolveQuestionComponent],
+  declarations: [AddQuestionComponent, QuestionListingComponent, SolveQuestionComponent, SubmissionComponent],
   imports: [
     CommonModule,
     QuestionRoutingModule,
