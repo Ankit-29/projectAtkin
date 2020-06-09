@@ -11,6 +11,7 @@ import { pipe } from 'rxjs';
 })
 export class SubmissionComponent implements OnInit {
   token = [];
+  reqTokens = [];
   correct = {};
   incorrect = {};
 
@@ -20,6 +21,7 @@ export class SubmissionComponent implements OnInit {
     private compilerService: CompilerService
   ) {
     this.token = JSON.parse(atob(this.activatedRoutes.snapshot.params.token));
+    this.reqTokens = [...this.token];
   }
 
   ngOnInit() {
@@ -28,15 +30,27 @@ export class SubmissionComponent implements OnInit {
   }
 
   removeToken() {
-    this.token.splice(0, 1);
+    this.reqTokens.splice(0, 1);
   }
 
-  checkResult() {
-    while (this.token.length > 0) {
-      const currentToken = this.token[0];
+  async checkResult() {
+    if (this.reqTokens.length === 0) {
+      return true;
+    } else {
+      const currentToken = this.reqTokens[0];
       this.makeCall(currentToken).then(res => {
         console.log(res);
-        this.removeToken();
+        const result = res.submissions[0];
+        if (result.status.id > 2) {
+          if (result.status.id === 3) {
+            this.correct[currentToken.token] = result.status.description;
+          } else {
+            this.incorrect[currentToken.token] = result.status.description;
+          }
+          console.log(this.incorrect);
+          this.removeToken();
+        }
+        this.checkResult();
       });
     }
   }

@@ -14,7 +14,7 @@
                         <tr *ngFor="let data of basicTable.data; let i=index">
                             <td>{{ i+1 }}</td>
                             <td>{{ correct[data.token] || incorrect[data.token] ? 'Completed' : 'Compiling' }}</td>
-                            <td>{{ correct[data.token] ? 'Correct' : incorrect[data.token] ? 'Incorrect' : 'Pending' }}</td>
+                            <td>{{ correct[data.token] ? correct[data.token] : incorrect[data.token] ? incorrect[data.token] : 'Pending' }}</td>
                         </tr>
                     </tbody>
                 </nz-table>
