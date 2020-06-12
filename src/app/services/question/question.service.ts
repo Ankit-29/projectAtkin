@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { map, catchError, tap } from 'rxjs/operators';
 import { UtilityService } from '../helpers/utility.service';
 import { IQuestion } from 'src/app/models/question.model';
+import { ICategory } from 'src/app/models/category.model';
 
 
 @Injectable({
@@ -15,6 +16,13 @@ export class QuestionService {
   getCategories() {
     this.utilityService.showPreLoader();
     return this.apiService.get('category/').pipe(
+      tap(() => this.utilityService.hidePreLoader())
+    );
+  }
+
+  getCategoryById(id) {
+    this.utilityService.showPreLoader();
+    return this.apiService.get(`category/${id}`).pipe(
       tap(() => this.utilityService.hidePreLoader())
     );
   }
@@ -42,6 +50,13 @@ export class QuestionService {
     );
   }
 
+  addCategory(categoryData: ICategory) {
+    return this.apiService.post('category/', categoryData);
+  }
+
+  updateCategory(payload: { id: string, categoryData: ICategory }) {
+    return this.apiService.put(`category/${payload.id}`, payload.categoryData);
+  }
 
 }
 

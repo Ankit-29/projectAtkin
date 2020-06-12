@@ -1,0 +1,27 @@
+<div class="cmp cmp-add-category m-0">
+    <div class="main-container">
+        <div class="row">
+            <div class="col-sm-12 card mt-2 ">
+                <form [formGroup]="categoryForm" (ngSubmit)="addCategories()" class="row m-0">
+                    <!-- {{ categoryForm.value | json }}. -->
+                    <div class="row">
+                        <div class="col-sm-12 mt-4 form-group">
+                            <label for="">Category Name</label>
+                            <input nz-input placeholder="Category Name" formControlName="name" nzSize="large" />
+                        </div>
+                        <div class="col-sm-12 l-12 form-group">
+                            <label for="">Category Description</label>
+                            <textarea row="1" formControlName="description" nz-input placeholder="">
+                    </textarea>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="d-flex justify-content-center">
+                                <button class="m-1" type="submit" nz-button nzType="primary">Save Category</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

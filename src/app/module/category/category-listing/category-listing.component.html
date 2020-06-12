@@ -1,0 +1,35 @@
+<div class="cmp cmp-question-listing m-0">
+    <div class="main-container">
+        <div class="row">
+            <div class="col-12 card mt-2">
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <nz-table #basicTable [nzData]="categories">
+                            <thead>
+                                <tr>
+                                    <th>Sr No</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th *ngIf='isAdmin'>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of basicTable.data; index as i">
+                                <td >{{ i+1 }}</td>
+                                <td>{{ data.name }}</td>
+                                <td>{{ data.description }}</td>
+                                <td *ngIf='isAdmin'>
+                                    <button nz-button nzShape="circle" (click)="editCategory(data._id)">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+    
+                              </tr>
+                            </tbody>
+                        </nz-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
