@@ -2,10 +2,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { QuestionListingComponent } from '../question/question-listing/question-listing.component';
 import { QuestionModule } from '../question/question.module';
+import { AddQuestionComponent } from '../question/add-question/add-question.component';
+import { SolveQuestionComponent } from '../question/solve-question/solve-question.component';
+import { SubmissionComponent } from '../question/submission/submission.component';
 
 const routes: Routes = [
-    { path: '', loadChildren: () => QuestionModule },
-    { path: 'question', loadChildren: () => QuestionModule },
+    { path: '', component: QuestionListingComponent },
+    { path: 'question', component: QuestionListingComponent },
+    { path: 'question/solve/:id', component: SolveQuestionComponent },
+    { path: 'submission/:token', component: SubmissionComponent },
 ];
 
 @NgModule({

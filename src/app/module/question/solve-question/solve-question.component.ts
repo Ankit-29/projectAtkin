@@ -22,7 +22,7 @@ export class SolveQuestionComponent implements OnInit {
   input = '\n\n';
   languageId = 71;
   languages = CONSTANT.AllowedLanguages;
-  editorOptions = { theme: 'vs', language: 'c' };
+  editorOptions = { theme: 'vs-dark', language: 'c' };
   isStdin = false;
   output = 'No Output Yet';
 

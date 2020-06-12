@@ -10,10 +10,10 @@ import { PlaygroundComponent } from './module/shared/playground/playground.compo
 import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
+  { path: '', loadChildren: () => UserModule, canActivate: [AuthGuard] },
   { path: 'playground', component: PlaygroundComponent },
   { path: 'login', loadChildren: () => LoginModule, canActivate: [LoginScreenGuard] },
   { path: 'admin', loadChildren: () => AdminModule, canActivate: [AuthGuard, AdminGuard] },
-  { path: '', loadChildren: () => UserModule, canActivate: [AuthGuard] },
   { path: '**', component: E404Component }
 ];
 

@@ -78,7 +78,7 @@ export class QuestionListingComponent implements OnInit {
   }
 
   editQuestion(qId) {
-    this.utilityService.changeNavigation(`question/edit/${qId}`);
+    this.utilityService.changeNavigation(`admin/question/edit/${qId}`);
   }
 
   solveQuestion(qId) {

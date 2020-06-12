@@ -18,14 +18,6 @@ const routes: Routes = [
     path: 'edit/:id',
     component: AddQuestionComponent
   },
-  {
-    path: 'solve/:id',
-    component: SolveQuestionComponent
-  },
-  {
-    path: 'submission/:token',
-    component: SubmissionComponent
-  },
 ];
 
 @NgModule({
