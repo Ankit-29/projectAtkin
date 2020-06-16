@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UtilityService } from 'src/app/services/helpers/utility.service';
+import { DbStorageService } from 'src/app/services/helpers/db-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -11,60 +12,65 @@ export class HeaderComponent implements OnInit {
   @Input() userInfo = null;
   @Input() routes = null;
 
-  constructor(private authService: AuthService,private utilityService: UtilityService) {
+  user = null;
+  role = 'User';
+  constructor(private authService: AuthService, private utilityService: UtilityService, private dbStorageService: DbStorageService) {
 
-    this.userInfo = {
-      name: 'Jane Person',
-      role: 'Admin',
-      avatarURL: 'https://i.pravatar.cc/150?img=14'
-    };
 
-    this.routes = [
-      { displayText: 'Home', url: '/', iconClass: 'fe-home' },
-      {
-        displayText: 'Question',
-        childs: [
-          { displayText: 'Question', url: '/question' },
-          { displayText: 'Add Question', url: '/question/add' },
-        ],
-        iconClass: 'fe-calendar'
-      },
-      {
-        displayText: 'Test',
-        childs: [
-          { displayText: 'Test', url: '/test' },
-          { displayText: 'Add Test', url: '/test/new' }
-        ],
-        iconClass: 'fe-file'
-      },
-      {
-        displayText: 'Package',
-        childs: [
-          { displayText: 'Package', url: '/package' },
-          { displayText: 'Add Package', url: '/package/new' }
-        ],
-        iconClass: 'fe-file'
-      },
-      {
-        displayText: 'Candidate',
-        childs: [
-          { displayText: 'Candidate', url: '/candidate' },
-          { displayText: 'Import', url: '/candidate/import' },
-          { displayText: 'Add Group', url: '/candidate/addgroup' },
-        ],
-        iconClass: 'fe-calendar'
-      },
-      {
-        displayText: 'Pages',
-        childs: [
-          { displayText: 'E404', url: '/e404' },
-        ],
-        iconClass: 'fe-file'
-      },
-    ];
+
   }
 
   ngOnInit() {
+    this.user = JSON.parse(this.dbStorageService.getItem('user'));
+    this.role = this.user.type === 1 ? 'Admin' : 'User';
+    this.userInfo = {
+      name: this.user.name,
+      role: this.role,
+      avatarURL: 'https://i.pravatar.cc/150?img=14'
+    };
+    this.setRoutes(this.user.type);
+  }
+
+  setRoutes(type) {
+    if (type === 1) {
+      this.routes = [
+        { displayText: 'Home', url: '/', iconClass: 'fe-home' },
+        {
+          displayText: 'Question',
+          childs: [
+            { displayText: 'Question List', url: '/admin/question' },
+            { displayText: 'Add Question', url: '/admin/question/add' },
+          ],
+          iconClass: 'fe-calendar'
+        },
+        {
+          displayText: 'Category',
+          childs: [
+            { displayText: 'Category List', url: '/admin/category' },
+            { displayText: 'Add Category', url: '/admin/category/add' },
+          ],
+          iconClass: 'fe-calendar'
+        },
+        {
+          displayText: 'Practice', url: '/question', iconClass: 'fe-file'
+        },
+        {
+          displayText: 'Playground', url: '/playground', iconClass: 'fe-file'
+        },
+      ];
+    } else {
+      this.routes = [
+        { displayText: 'Home', url: '/', iconClass: 'fe-home' },
+        {
+          displayText: 'Practice', url: '/question', iconClass: 'fe-file'
+        },
+        {
+          displayText: 'Playground', url: '/playground', iconClass: 'fe-file'
+        },
+      ];
+
+    }
+
   }
 
   signOut() {
