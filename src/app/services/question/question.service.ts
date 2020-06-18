@@ -58,6 +58,17 @@ export class QuestionService {
     return this.apiService.put(`category/${payload.id}`, payload.categoryData);
   }
 
+  getSolvedQuestions() {
+    this.utilityService.showPreLoader();
+    return this.apiService.get(`user/solved/`).pipe(
+      tap(() => this.utilityService.hidePreLoader())
+    );
+  }
+
+  updateSolvedQuestions(payload) {
+    return this.apiService.put(`user/questionSolved/`, payload);
+  }
+
 }
 
 

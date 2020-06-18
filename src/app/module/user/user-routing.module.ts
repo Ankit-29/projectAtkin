@@ -10,7 +10,7 @@ const routes: Routes = [
     { path: '', component: QuestionListingComponent },
     { path: 'question', component: QuestionListingComponent },
     { path: 'question/solve/:id', component: SolveQuestionComponent },
-    { path: 'submission/:token', component: SubmissionComponent },
+    { path: 'submission/:qid/:token', component: SubmissionComponent },
 ];
 
 @NgModule({

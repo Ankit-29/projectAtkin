@@ -21,6 +21,7 @@ export class QuestionListingComponent implements OnInit {
   difficulty = CONSTANT.LEVEL;
 
   questions: IQuestion[] = [];
+  solvedQuestions = [];
 
   filterGroup: FormGroup = null;
 
@@ -39,6 +40,7 @@ export class QuestionListingComponent implements OnInit {
     this.initCategories();
     this.initQuestion();
     this.initFilterGroup();
+    this.getSolvedQuestionForUser();
   }
 
   initCategories() {
@@ -85,4 +87,11 @@ export class QuestionListingComponent implements OnInit {
     this.utilityService.changeNavigation(`question/solve/${qId}`);
   }
 
+  getSolvedQuestionForUser(){
+    this.questionService.getSolvedQuestions().subscribe(response => {
+      this.solvedQuestions = response.solvedQuestions;
+    }, error => {
+      this.utilityService.showMessage(error.error.message, MessageTypes.Error);
+    });
+  }
 }

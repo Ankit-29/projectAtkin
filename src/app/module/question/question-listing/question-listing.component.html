@@ -5,15 +5,15 @@
                 <form [formGroup]="filterGroup" class="row mt-2" (ngSubmit)="filter()">
                     <div class="col-sm-12 col-md-2 form-group d-flex flex-column">
                         <label for="">Category</label>
-                        <nz-select formControlName="categories" [nzMaxTagCount]="3" [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple"
-                            nzPlaceHolder="Please select">
+                        <nz-select formControlName="categories" [nzMaxTagCount]="3"
+                            [nzMaxTagPlaceholder]="tagPlaceHolder" nzMode="multiple" nzPlaceHolder="Please select">
                             <nz-option *ngFor="let item of categoryList" [nzLabel]="item" [nzValue]="item">
                             </nz-option>
                         </nz-select>
                     </div>
                     <div class="col-sm-12 col-md-2 form-group d-flex flex-column">
                         <label for="">Difficulty</label>
-                        <nz-select formControlName="level" nzAllowClear nzPlaceHolder="Choose" >
+                        <nz-select formControlName="level" nzAllowClear nzPlaceHolder="Choose">
                             <nz-option nzValue="" nzLabel="Any">
                             </nz-option>
                             <nz-option *ngFor="let lvl of difficulty" nzValue="{{ lvl.id }}" nzLabel="{{ lvl.label }}">
@@ -39,26 +39,32 @@
                                     <th>Categories</th>
                                     <th>Difficulty</th>
                                     <th *ngIf='isAdmin'>Edit</th>
+                                    <th *ngIf='!isAdmin'>Status</th>
                                     <th *ngIf='!isAdmin'>Solve</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let data of basicTable.data">
-                                <td>{{ data.qId }}</td>
-                                <td>{{ data.title }}</td>
-                                <td>{{ data.categories.join(', ') }}</td>
-                                <td>{{ difficulty[data.level-1].label }}</td>
-                                <td *ngIf='isAdmin'>
-                                    <button nz-button nzShape="circle" (click)="editQuestion(data.qId)">
-                                        <i class="fa fa-edit" aria-hidden="true"></i>
-                                    </button>
-                                </td>
-                                <td *ngIf='!isAdmin'>
-                                    <button nzType="primary" nz-button  (click)="solveQuestion(data.qId)">
-                                        Solve
-                                    </button>
-                                </td>
-                              </tr>
+                                    <td>{{ data.qId }}</td>
+                                    <td>{{ data.title }}</td>
+                                    <td>{{ data.categories.join(', ') }}</td>
+                                    <td>{{ difficulty[data.level-1].label }}</td>
+                                    <td *ngIf='isAdmin'>
+                                        <button nz-button nzShape="circle" (click)="editQuestion(data.qId)">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                    <td *ngIf='!isAdmin'>
+                                        <div [class.text-success]="solvedQuestions.indexOf(data.qId)!=-1">
+                                            {{ solvedQuestions.indexOf(data.qId)!=-1?'Solved':'Unsolved' }}
+                                        </div>
+                                    </td>
+                                    <td *ngIf='!isAdmin'>
+                                        <button nzType="primary" nz-button (click)="solveQuestion(data.qId)">
+                                            Solve
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </nz-table>
                     </div>

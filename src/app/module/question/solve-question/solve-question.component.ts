@@ -66,7 +66,7 @@ export class SolveQuestionComponent implements OnInit {
       qId: this.qId
     };
     this.compilerService.submit(submission).subscribe((response) => {
-      this.utilityService.changeNavigation(`submission/${btoa(JSON.stringify(response))}`);
+      this.utilityService.changeNavigation(`submission/${this.qId}/${btoa(JSON.stringify(response))}`);
     }, error => {
       this.utilityService.showMessage(error.error.message, MessageTypes.Error);
       this.utilityService.hidePreLoader();
