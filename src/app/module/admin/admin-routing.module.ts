@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { QuestionListingComponent } from '../question/question-listing/question-listing.component';
 import { QuestionModule } from '../question/question.module';
 import { CategoryModule } from '../category/category.module';
+import { DashboardComponent } from '../shared/dashboard/dashboard.component';
 
 const routes: Routes = [
-    { path: '', loadChildren: () => QuestionModule },
+    { path: '', component: DashboardComponent },
     { path: 'question', loadChildren: () => QuestionModule },
     { path: 'category', loadChildren: () => CategoryModule}
 ];

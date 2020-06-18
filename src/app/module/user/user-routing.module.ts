@@ -5,9 +5,11 @@ import { QuestionModule } from '../question/question.module';
 import { AddQuestionComponent } from '../question/add-question/add-question.component';
 import { SolveQuestionComponent } from '../question/solve-question/solve-question.component';
 import { SubmissionComponent } from '../question/submission/submission.component';
+import { DashboardComponent } from '../shared/dashboard/dashboard.component';
 
 const routes: Routes = [
     { path: '', component: QuestionListingComponent },
+    { path: 'home', component: DashboardComponent },
     { path: 'question', component: QuestionListingComponent },
     { path: 'question/solve/:id', component: SolveQuestionComponent },
     { path: 'submission/:qid/:token', component: SubmissionComponent },
