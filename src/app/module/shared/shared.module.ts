@@ -15,10 +15,11 @@ import { CodeEditorComponent } from './code-editor/code-editor.component';
 import { PlaygroundComponent } from './playground/playground.component'
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
-  declarations: [E404Component, CodeEditorComponent, PlaygroundComponent],
+  declarations: [E404Component, CodeEditorComponent, PlaygroundComponent, DashboardComponent],
   imports: [
     CommonModule,
     NzSwitchModule,
@@ -37,7 +38,8 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
     NzIconModule,
     NzTableModule,
     NzSwitchModule,
-    NzTabsModule
+    NzTabsModule,
+    DashboardComponent
   ]
 })
 export class SharedModule { }
