@@ -11,7 +11,8 @@ import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: 'playground', component: PlaygroundComponent },
-  { path: 'login', loadChildren: () => LoginModule, canActivate: [LoginScreenGuard] },
+  { path: 'auth', loadChildren: () => LoginModule, canActivate: [LoginScreenGuard] },
+  // { path: 'signup', loadChildren: () => LoginModule, canActivate: [LoginScreenGuard] },
   { path: 'admin', loadChildren: () => AdminModule, canActivate: [AuthGuard, AdminGuard] },
   { path: '', loadChildren: () => UserModule, canActivate: [AuthGuard] },
   { path: '**', component: E404Component }

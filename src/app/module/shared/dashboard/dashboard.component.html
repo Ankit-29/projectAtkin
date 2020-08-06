@@ -1,102 +1,23 @@
 <ng-template [ngIf]="isAdmin">
 
-<div class="main-container">
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card text-center">
-                <div class="card-header">
-                        <h4>Questions</h4>
-                    </div>
-                <div class="card-body">
-                    <h5 class="card-title">Total Number of Questions</h5>
-                    <p class="card-text"> {{ totalQuestion }}</p>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <a href="" class="btn btn-primary">Add Question</a>
-                        </div>
-                        <div class="col-sm-6 ">
-                            <a href="#" class="btn btn-primary">View Questions</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card text-center">
-                <div class="card-header">
-                    <h4>Categories</h4>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Total Number of Categories</h5>
-                    <p class="card-text">{{ totalCategories }}</p>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <a href="#" class="btn btn-primary">Add Category</a>
-                        </div>
-                        <div class="col-sm-6 ">
-                            <a href="#" class="btn btn-primary">View Categories</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="card text-center">
-                <div class="card-header">
-                    <h4>Candidates</h4>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Total Number of Candidates</h5>
-                    <p class="card-text">20</p>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <a href="#" class="btn btn-primary">Add new candidate</a>
-                        </div>
-                        <div class="col-sm-6 ">
-                            <a href="#" class="btn btn-primary">View all candidates</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card text-center">
-                <div class="card-header">
-                    <h4>Question status</h4>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Total Number of Solved and unsolved Questions</h5>
-                    <p class="card-text">{{ solvedQuestion }} </p>
-                    <p class="card-text">{{ totalQuestion-solvedQuestion }} </p>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <a href="#" class="btn btn-primary">Solved Questions</a>
-                        </div>
-                        <div class="col-sm-6 ">
-                            <a href="#" class="btn btn-primary">Unsolved Questions</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</ng-template>
-<!--for user-->
-<ng-template [ngIf]='!isAdmin'>
     <div class="main-container">
-        <div class="row">
+        <div class="row pt-1">
             <div class="col-sm-6">
                 <div class="card text-center">
                     <div class="card-header">
-                            <h4>Questions</h4>
-                        </div>
+                        <h4>Questions</h4>
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Total Number of Questions</h5>
-                        <p class="card-text">{{ totalQuestion }}</p>
-                        <a routerLink="/" class="btn btn-primary">View all Questions</a>
+                        <p class="card-text"> {{ totalQuestion }}</p>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a [routerLink]="['/admin/question/add']" class="btn btn-primary">Add Question</a>
+                            </div>
+                            <div class="col-sm-6 ">
+                                <a [routerLink]="['/admin/question/']" class="btn btn-primary">View Questions</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,7 +29,85 @@
                     <div class="card-body">
                         <h5 class="card-title">Total Number of Categories</h5>
                         <p class="card-text">{{ totalCategories }}</p>
-                        <a href="#" class="btn btn-primary">View all categories</a>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a [routerLink]="['/admin/category/add']" class="btn btn-primary">Add Category</a>
+                            </div>
+                            <div class="col-sm-6 ">
+                                <a [routerLink]="['/admin/category']" class="btn btn-primary">View Categories</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h4>Candidates</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Total Number of Candidates</h5>
+                        <p class="card-text">20</p>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="#" class="btn btn-primary text-light">Add new candidate</a>
+                            </div>
+                            <div class="col-sm-6 ">
+                                <a href="#" class="btn btn-primary text-light">View all candidates</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h4>Question status</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Solved Question Status</h5>
+                        <p class="card-text">{{ solvedQuestion }}/{{totalQuestion}} </p>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a [routerLink]="['/question']" class="btn btn-primary" class="btn btn-primary text-light">Solved Questions</a>
+                            </div>
+                            <div class="col-sm-6 ">
+                                <a [routerLink]="['/question']" class="btn btn-primary" class="btn btn-primary text-light">Unsolved Questions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!--for user-->
+<ng-template [ngIf]='!isAdmin'>
+    <div class="main-container">
+        <div class="row pt-1">
+            <div class="col-sm-6">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h4>Questions</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Total Number of Questions</h5>
+                        <p class="card-text">{{ totalQuestion }}</p>
+                        <button [routerLink]="['/question']" class="btn btn-primary">View all Questions</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h4>Categories</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Total Number of Categories</h5>
+                        <p class="card-text">{{ totalCategories }}</p>
+                        <a [routerLink]="['/question']" class="btn btn-primary">Solve Questions by Category</a>
                     </div>
                 </div>
             </div>
@@ -117,11 +116,11 @@
             <div class="col-sm-12">
                 <div class="card text-center">
                     <div class="card-header">
-                        <h4>Candidates</h4>
+                        <h4>Report</h4>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Check my submissions</h5>
-                        
+                        <h5 class="card-title">Submissions</h5>
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <p class="card-text">Solved Questions:{{ solvedQuestion }}</p>

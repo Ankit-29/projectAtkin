@@ -53,6 +53,14 @@ export class AuthService {
         );
     }
 
+    signUp(credential) {
+        return this.apiService.post(`user/signup/`, credential).pipe(
+            map((data: { message: string; }) => {
+                return data;
+            })
+        );
+    }
+
     logout() {
         this.dbStorageService.setItem('user', null);
         this.dbStorageService.setItem('token', null);

@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   setRoutes(type) {
     if (type === 1) {
       this.routes = [
-        { displayText: 'Home', url: '/', iconClass: 'fe-home' },
+        { displayText: 'Home', url: '/admin', iconClass: 'fe-home' },
         {
           displayText: 'Question',
           childs: [
@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
       ];
     } else {
       this.routes = [
-        { displayText: 'Home', url: '/', iconClass: 'fe-home' },
+        { displayText: 'Home', url: '/home', iconClass: 'fe-home' },
         {
           displayText: 'Practice', url: '/question', iconClass: 'fe-file'
         },
@@ -75,6 +75,6 @@ export class HeaderComponent implements OnInit {
 
   signOut() {
     this.authService.logout();
-    this.utilityService.changeNavigation('/login');
+    this.utilityService.changeNavigation('/auth/login');
   }
 }

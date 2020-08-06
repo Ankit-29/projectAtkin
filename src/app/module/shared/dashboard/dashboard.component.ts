@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
     this.isAdmin = this.routes.url === '/admin';
     this.getTotalQuestions();
     this.getSolvedQuestion();
+    this.getTotalCategories();
   }
 
   getTotalQuestions() {
@@ -44,7 +45,7 @@ export class DashboardComponent implements OnInit {
   getTotalCategories() {
     this.questionService.getCategories().subscribe(res => {
       this.totalCategories = res.count;
-    })
+    });
   }
 
 }

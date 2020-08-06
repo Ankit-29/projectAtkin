@@ -16,6 +16,7 @@ import { PlaygroundComponent } from './playground/playground.component'
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MonacoEditorModule.forRoot(),
     NzSelectModule,
     NzButtonModule,
+    RouterModule,
   ],
   exports: [
     E404Component,

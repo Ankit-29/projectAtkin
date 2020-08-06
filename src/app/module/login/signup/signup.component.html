@@ -7,36 +7,43 @@
                         <div class="text-center mb-6">
                             <!-- <h1 class="text-primary">ATKIN</h1> -->
                         </div>
-                        <form [formGroup]='loginForm' class="card" (ngSubmit)="login()">
+                        <form [formGroup]='signUpForm' class="card" (ngSubmit)="signUp()">
                             <!-- {{loginForm.value | json}} -->
                             <div class="card-body p-6">
-                                <div class="card-title">Login to your account</div>
+                                <div class="card-title">Create New account</div>
                                 <div class="form-group">
-                                    <label class="form-label">Email address</label>
+                                    <label class="form-label">Name *</label>
+                                    <input formControlName="name" type="text" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" placeholder="Enter Name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Emai *</label>
                                     <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1"
                                         aria-describedby="emailHelp" placeholder="Enter email">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">
-                                        Password
+                                        Password *
                                         <!-- <a href="./forgot-password.html" class="float-right small">I forgot password</a> -->
                                     </label>
                                     <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1"
                                         placeholder="Password">
                                 </div>
                                 <div class="form-group">
-                                    <label class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" />
-                                        <span class="custom-control-label">Remember me</span>
+                                    <label class="form-label">
+                                        Confirm Password *
+                                        <!-- <a href="./forgot-password.html" class="float-right small">I forgot password</a> -->
                                     </label>
+                                    <input formControlName="cPassword" type="password" class="form-control" id="exampleInputPassword1"
+                                        placeholder="Password">
                                 </div>
                                 <div class="form-footer">
-                                    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-block">Sign in</button>
+                                    <button type="submit"  class="btn btn-primary btn-block">Sign Up</button>
                                 </div>
                             </div>
                         </form>
                         <div class="text-center text-muted">
-                            Don't have account yet? <a [routerLink]="['/auth/signup']">Sign up</a>
+                            Already a user <a [routerLink]="['/auth/login']">Sign In</a>
                         </div>
                     </div>
                 </div>
